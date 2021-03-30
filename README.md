@@ -30,16 +30,7 @@ See [Configuring quasar.conf.js](https://v1.quasar.dev/quasar-cli/quasar-conf-js
 #### 03/29/21
 Starting with authorization with firebaseui. Installed, and visable, but hella ugly. Need to clean it up.
 
-Schema: 
-User > Entires > Date, Tag list
-User > Tags
+Styling functional now. Need to break into a Login component. Header will have Sign In if not logged in and 'My Journal' & 'Sign Out' if signed in. 
 
-Pages:
-Login
-Journal
-Tags
-
-Components: 
-tagEntry
-journal
+Able to read if a user is signed in or not. Need to get a user collection created on new user still. 
 
