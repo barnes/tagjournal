@@ -32,5 +32,8 @@ Starting with authorization with firebaseui. Installed, and visable, but hella u
 
 Styling functional now. Need to break into a Login component. Header will have Sign In if not logged in and 'My Journal' & 'Sign Out' if signed in. 
 
-Able to read if a user is signed in or not. Need to get a user collection created on new user still. 
+Able to read if a user is signed in or not. Need to get a user collection created on new user still. Pretty close to getting that up and running, just having issues getting the db object to sync up.
+
+Users are being added to the DB. Logout function is working. Getting user status is working. The bones are there, just need to clean it up with conditional rendering for logged in and not logged in users.
+
 

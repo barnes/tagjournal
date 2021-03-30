@@ -1,6 +1,7 @@
 <template>
   <q-page>
     <div class="q-pa-lg">
+      <q-btn @click="logout" label="logout" />
       <q-card>
         <q-card-section class="bg-secondary text-white">
           <h3>A dead simple way to journal</h3>
@@ -30,6 +31,11 @@ firebase.auth().onAuthStateChanged((user) => {
 });
 export default {
   name: 'PageIndex',
+  methods: {
+    logout() {
+      firebase.auth().signOut();
+    }
+  }
 }
 </script>
 

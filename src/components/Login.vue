@@ -24,15 +24,19 @@ ui.start('.firebaseui-auth-container', {
   // Other config options...
 });
 
+let userObject = {
+    uid: ''
+}
+
 var uiConfig = {
   callbacks: {
     signInSuccessWithAuthResult: function(authResult, redirectUrl) {
         var user = authResult.user;
-        console.log(user.uid);
-        db.collection("user").add(user.uid)
+        console.log(user);
+        userObject.uid = user.uid;
+        db.collection("users").doc(user.uid).set({active: true})
             .then((docRef) => {
-                console.log("Document written with ID: ", docRef.id)
-                console.log(user.uid)
+                console.log("Document written")
             })
             .catch((error) => {
                 console.error("Error adding document: ", error)
@@ -42,7 +46,7 @@ var uiConfig = {
         console.log(isNewUser);
         var providerId = authResult.additionalUserInfo.providerId;
         var operationType = authResult.operationType;
-      return true;
+      return false;
     },
     uiShown: function() {
       // The widget is rendered.
@@ -65,7 +69,7 @@ var uiConfig = {
 };
 
 // The start method will wait until the DOM is loaded.
-ui.start('#firebaseui-auth-container', uiConfig);
+ui.start('.firebaseui-auth-container', uiConfig);
 
 export default {
   name: 'Login',

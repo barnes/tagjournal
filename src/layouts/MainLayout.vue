@@ -9,7 +9,6 @@
         <q-route-tab to="/" label="Home" />
         <q-route-tab to="/login" label="Login" />
         <q-route-tab to="/page2" label="My Journal" />
-        <q-route-tab to="/page3" label="Logout" />
       </q-tabs>
     </q-header>
 
@@ -21,11 +20,17 @@
 </template>
 
 <script>
+import firebase from 'firebase/app';
 
 
 export default {
   data () {
     return {
+    }
+  },
+  methods: {
+    logout() {
+      firebase.auth.signOut();
     }
   }
 }
