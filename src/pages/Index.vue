@@ -1,7 +1,6 @@
 <template>
   <q-page>
     <div class="q-pa-lg">
-      <q-btn @click="logout" label="logout" />
       <q-card>
         <q-card-section class="bg-secondary text-white">
           <h3>A dead simple way to journal</h3>
@@ -17,26 +16,31 @@
 
 <script>
 import firebase from 'firebase/app';
-firebase.auth().onAuthStateChanged((user) => {
-  if (user) {
-    // User is signed in, see docs for a list of available properties
-    // https://firebase.google.com/docs/reference/js/firebase.User
-    var uid = user.uid;
-    console.log('signed in');
-  } else {
-    // User is signed out
-    // ...
-    console.log('signed out');
-  }
-});
 export default {
   name: 'PageIndex',
-  methods: {
-    logout() {
-      firebase.auth().signOut();
+  data () {
+    return {
+      loggedIn: false
     }
+  },
+  mounted() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        this.loggedIn = true;
+        console.log(this.loggedIn);
+      } else {
+        // User is signed out
+        // ...
+        this.loggedIn = false;
+        console.log(this.loggedIn);
+      }
+    });
   }
 }
+
+
 </script>
 
 

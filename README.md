@@ -36,4 +36,7 @@ Able to read if a user is signed in or not. Need to get a user collection create
 
 Users are being added to the DB. Logout function is working. Getting user status is working. The bones are there, just need to clean it up with conditional rendering for logged in and not logged in users.
 
+#### 03/30/21
+Conditional header navigation is done. Login / log out workflow is functional. Pages all made. Last hiccup is this damn delayed rendering of the login UI. Must restart page to get it to load. Probably some funky issue with the way quasar / vue loads the pages. Once I can work out that issue, lock down this branch as a nice and easy drop in authentication boilerplate.
+
 

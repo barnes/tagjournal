@@ -7,8 +7,9 @@
 
       <q-tabs align="right">
         <q-route-tab to="/" label="Home" />
-        <q-route-tab to="/login" label="Login" />
-        <q-route-tab to="/page2" label="My Journal" />
+        <q-route-tab v-if="!loggedIn" to="/login" label="Login" />
+        <q-route-tab v-if="loggedIn" to="/page2" label="My Journal" />
+        <q-route-tab v-if="loggedIn" to="/logout" label="Logout" />
       </q-tabs>
     </q-header>
 
@@ -21,17 +22,29 @@
 
 <script>
 import firebase from 'firebase/app';
-
-
 export default {
+  name: 'PageIndex',
   data () {
     return {
+      loggedIn: false
     }
   },
-  methods: {
-    logout() {
-      firebase.auth.signOut();
-    }
+  mounted() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        this.loggedIn = true;
+        console.log(this.loggedIn);
+      } else {
+        // User is signed out
+        // ...
+        this.loggedIn = false;
+        console.log(this.loggedIn);
+      }
+    });
   }
 }
+
+
 </script>
