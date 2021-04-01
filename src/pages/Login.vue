@@ -2,8 +2,8 @@
   <q-page>
     <q-card>
       <q-card-section>
-        <div class="firebaseui-auth-container"></div>
-        <div id="loader">Loading...</div>
+        <section class="firebaseui-auth-container"></section>
+        <section id="loader">Loading...</section>
       </q-card-section>
     </q-card>
   </q-page>
@@ -14,23 +14,21 @@ import firebase from 'firebase'
 import * as firebaseui from 'firebaseui'
 import db from '../boot/firebase'
 
+
+    
+
 export default {
   name: 'Login',
   mounted() {
-    // Initialize the FirebaseUI Widget using Firebase.
-    let ui = new firebaseui.auth.AuthUI(firebase.auth());
-
-    ui.start('.firebaseui-auth-container', {
-      signInOptions: [
-        firebase.auth.EmailAuthProvider.PROVIDER_ID,
-        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-      ],
-      // Other config options...
-    });
-
     let userObject = {
         uid: ''
     }
+
+    let ui = firebaseui.auth.AuthUI.getInstance();
+    if (!ui) {
+        ui = new firebaseui.auth.AuthUI(firebase.auth());
+    }
+
 
     var uiConfig = {
       callbacks: {
@@ -71,11 +69,11 @@ export default {
       // Privacy policy url.
       privacyPolicyUrl: '<your-privacy-policy-url>'
     };
+    
+  
 
-    // The start method will wait until the DOM is loaded.
+
     ui.start('.firebaseui-auth-container', uiConfig);
-
-
 
   }
 }
