@@ -3,7 +3,16 @@ Render tags as soon as added. -->
 
 <template>
     <q-page>
-        <q-input v-on:keyup.enter="addTag" square outlined v-model="inputEntry" label="Square outlined" />
+        <q-input v-on:keyup.enter="addTag" square outlined v-model="inputEntry" label="Enter new tag, press enter." />
+        <q-btn v-for="tag in tags" :label="tag" :key="tag.id"/>
+        <div class="q-pa-lg">
+            <q-option-group
+                v-model="group"
+                :options="tags"
+                color="yellow"
+                type="toggle"
+            />
+        </div>
     </q-page>
 </template>
 
@@ -14,6 +23,7 @@ export default {
   name: 'journalEntry',
   data () {
     return {
+      group: '',
       loggedIn: false,
       inputEntry: '',
       uid: '',
@@ -85,30 +95,31 @@ export default {
             this.loggedIn = true;
             this.uid = user.uid;
             console.log(this.uid);
+            db.collection("users").doc(this.uid).collection("tags")
+                .onSnapshot((snapshot) => {
+                snapshot.docChanges().forEach((change) => {
+                let tagChange = change.doc.data()
+                tagChange.id = change.doc.id
+                    if (change.type === "added") {
+                        console.log("New tag ", tagChange);
+                        this.tags.unshift(tagChange.tag);
+                        console.log(this.tags);
+
+                    }
+                    if (change.type === "modified") {
+                        console.log("Modified tag: ", tagChange);
+                    }
+                    if (change.type === "removed") {
+                        console.log("Removed tag: ", tagChange);
+                    }
+                });
+                });
         } else {
             this.loggedIn = false;
         }
         });
 
-        db.collection("users").doc(this.uid).collection("tags")
-        .onSnapshot((snapshot) => {
-        snapshot.docChanges().forEach((change) => {
-          let tagChange = change.doc.data()
-          tagChange.id = change.doc.id
-            if (change.type === "added") {
-                console.log("New tag ", tagChange);
-                this.tags.unshift(tagChange.tag);
-                console.log(this.tags);
-
-            }
-            if (change.type === "modified") {
-                console.log("Modified tag: ", tagChange);
-            }
-            if (change.type === "removed") {
-                console.log("Removed tag: ", tagChange);
-            }
-        });
-        });
+        
   }
 }
 
