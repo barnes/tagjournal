@@ -8,7 +8,7 @@
       <q-tabs align="right">
         <q-route-tab to="/" label="Home" />
         <q-route-tab v-if="!loggedIn" to="/login" label="Login" />
-        <q-route-tab v-if="loggedIn" to="/page2" label="My Journal" />
+        <q-route-tab v-if="loggedIn" to="/journal" label="My Journal" />
         <q-route-tab v-if="loggedIn" to="/logout" label="Logout" />
       </q-tabs>
     </q-header>
