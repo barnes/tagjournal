@@ -42,4 +42,7 @@ Conditional header navigation is done. Login / log out workflow is functional. P
 #### 3/31/21
 Login page renders correctly now. Finally. All ready to rock and roll. 
 
+#### 4/1/21
+Journal Entry Page allows for creation of tags, still need to have buttons add or remove the tag from their journal entry. 
+
 
