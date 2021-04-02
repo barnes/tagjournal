@@ -45,4 +45,9 @@ Login page renders correctly now. Finally. All ready to rock and roll.
 #### 4/1/21
 Journal Entry Page allows for creation of tags, still need to have buttons add or remove the tag from their journal entry. 
 
+#### 4/2/21
+Toggles are nearly functional. Some issue with duplicate IDs confusing things that I need to check out. Looking into update the user collection with more fields. Done now, takes in email and users name. Submit button logs an entry to the database. 
+
+This evening I want to retrieve and display all entries on the Journal page, and wrap the entry  form into the dialog box. 
+
 

@@ -7,9 +7,11 @@ Render tags as soon as added. -->
             <p>Select the tags that apply to your day. If you want to add a new tag, type it here and press enter</p>
             <q-input v-on:keyup.enter="addTagToDB" square outlined v-model="inputEntry" label="Enter new tag, press enter." />
             <q-btn v-for="tag in tags" :label="tag.tag" :key="tag.id"  size="lg" @click="addTag(tag)"/>
-            <q-seperator />
+            <q-separator />
             <h2>Your Entry</h2>
             <q-btn v-for="entry in newEntry" :key="entry.id" disable :label="entry.tag" />
+            <q-separator />
+            <q-btn @click="submitEntry" label="submit" size="xl"/>
             
         </div>
     </q-page>
@@ -33,7 +35,8 @@ export default {
       },
       newEntry: [
 
-      ]
+      ],
+      newEntryObj: {}
 
     }
   },
@@ -43,15 +46,33 @@ export default {
             if(tag.display === false){
                 this.newEntry.unshift(tag);
                 //TODO: Set display to true in the parent tag object.
-                console.log(this.newEntry)
+                let index = this.tags.findIndex(tagIn => tagIn.id === tag.id)
+                this.tags[index].display = true;
             }
             //display true -> currently in entry
             else {
                 //TODO: Remove the clicked button from new entry.
-                //let index = this.newEntry.findIndex(tag => tag.id === tag.id);
-                //this.newEntry.splice(index,1);
+                let index = this.newEntry.findIndex(tagIn => tagIn.id === tag.id);
+                this.newEntry.splice(index,1);
+                let index2 = this.tags.findIndex(tagIn => tagIn.id === tag.id)
+                this.tags[index2].display = false;
             }
             
+        },
+
+        submitEntry() {
+            this.newEntry.created = Date.now();
+            this.newEntryObj = Object.assign({},this.newEntry);
+            console.log(this.newEntryObj);
+            db.collection("users").doc(this.uid).collection("entries").add(this.newEntryObj)
+            .then((docRef) => {
+                console.log("Document entry written");
+                this.newEntry = [];
+                this.newEntryObj = {};
+            })
+            .catch((error) => {
+                console.log(error);
+            })
         },
 
         addTagToDB() {

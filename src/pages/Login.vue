@@ -36,7 +36,10 @@ export default {
             var user = authResult.user;
             console.log(user);
             userObject.uid = user.uid;
-            db.collection("users").doc(user.uid).set({active: true})
+            db.collection("users").doc(user.uid).set({
+              displayName: user.displayName,
+              email: user.email,
+              })
                 .then((docRef) => {
                     console.log("Document written")
                 })
