@@ -50,4 +50,6 @@ Toggles are nearly functional. Some issue with duplicate IDs confusing things th
 
 This evening I want to retrieve and display all entries on the Journal page, and wrap the entry  form into the dialog box. 
 
+Edit tag page created, allows for deletiong of tags. Needs better formatting & possibility of tag categories (fitness, social, work, etc.)
+
 

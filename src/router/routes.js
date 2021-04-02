@@ -8,6 +8,7 @@ const routes = [
       { path: 'login', component: () => import('pages/Login.vue') },
       { path: 'logout', component: () => import('pages/Logout.vue') },
       { path: 'journal', component: () => import('pages/Journal.vue') },
+      { path: 'tags', component: () => import('pages/editTags.vue') },
     ]
   },
 
