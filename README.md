@@ -52,4 +52,8 @@ This evening I want to retrieve and display all entries on the Journal page, and
 
 Edit tag page created, allows for deletiong of tags. Needs better formatting & possibility of tag categories (fitness, social, work, etc.)
 
+Journal entry dialog is functioning now.
+
+Journal page currently retrieves journal entries, but does not display. Need some way to parase the array of entry objects first? 
+
 

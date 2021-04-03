@@ -2,19 +2,20 @@
 Render tags as soon as added. -->
 
 <template>
-    <q-page>
-        <div class="q-pa-lg">
-            <p>Select the tags that apply to your day. If you want to add a new tag, type it here and press enter</p>
-            <q-input v-on:keyup.enter="addTagToDB" square outlined v-model="inputEntry" label="Enter new tag, press enter." />
-            <q-btn v-for="tag in tags" :label="tag.tag" :key="tag.id"  size="lg" @click="addTag(tag)"/>
-            <q-separator />
-            <h2>Your Entry</h2>
-            <q-btn v-for="entry in newEntry" :key="entry.id" disable :label="entry.tag" />
-            <q-separator />
-            <q-btn @click="submitEntry" label="submit" size="xl"/>
-            
-        </div>
-    </q-page>
+    <q-dialog ref="dialog" @hide="onDialogHide">
+        <q-card>
+            <q-card-section>
+                <p>Select the tags that apply to your day. If you want to add a new tag, type it here and press enter</p>
+                <q-input v-on:keyup.enter="addTagToDB" square outlined v-model="inputEntry" label="Enter new tag, press enter." />
+                <q-btn v-for="tag in tags" :label="tag.tag" :key="tag.id"  size="lg" @click="addTag(tag)"/>
+                <q-separator />
+                <h2>Your Entry</h2>
+                <q-btn v-for="entry in newEntry" :key="entry.id" disable :label="entry.tag" />
+                <q-separator />
+                <q-btn @click="submitEntry" label="submit" size="xl"/>
+            </q-card-section>
+        </q-card>
+    </q-dialog>
 </template>
 
 <script>
